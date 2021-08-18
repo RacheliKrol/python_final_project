@@ -1,3 +1,5 @@
+import re
+
 import backend_code
 import os
 def conv(strng):
@@ -10,19 +12,20 @@ def conv(strng):
     k=k.replace('\t','\\t')
     k=k.replace('\v','\\v')
     return k
+backend_code = backend_code.backend()
 def test_rename_file():
     backend_code.renameFile(conv('E:\רחלי לימודים\בוטקמפ\python\finalProject'), '.txt', '.py')
     for count, filename in enumerate(os.listdir(conv('E:\רחלי לימודים\בוטקמפ\python\finalProject'))):
-        if filename.split('.')[1]=='txt':
+        if  filename.split('.')[1]=='txt':
             return False
         return True
 
 def test_cancel():
     backend_code.cancel_last_action()
     for count, filename in enumerate(os.listdir(conv('E:\רחלי לימודים\בוטקמפ\python\finalProject'))):
-        if filename.split('.')[1]=='txt':
+        if re.search(r'\.', filename) and filename.split('.')[1]=='txt':
             return True
-        return False
+    return False
 
 print(test_rename_file())
 print(test_cancel())
