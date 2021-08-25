@@ -1,17 +1,23 @@
 import sqlite3
 
+
+
 class connection_db:
     def __init__(self):
         pass
 
     def sql_create_table(self):
         """function to create the db, not for the user"""
-        self.connect.execute('''CREATE TABLE FILE_NAME
-                 (old_name TXT PRIMARY KEY     NOT NULL,
-                 new_name           TEXT    NOT NULL);''')
-        print ("Table created successfully")
-        self.connect.execute("INSERT INTO FILE_NAME VALUES('txt', 'py')")
-        self.connect.commit()
+        try:
+            con = sqlite3.connect('file_last_vs.db')
+            con.execute('''CREATE TABLE FILE_NAME
+                     (old_name TXT PRIMARY KEY     NOT NULL,
+                     new_name           TEXT    NOT NULL);''')
+            print ("Table created successfully")
+            con.execute("INSERT INTO FILE_NAME VALUES('txt', 'py')")
+            con.commit()
+        except ValueError:
+            return True
 
     def sql_update(self, old, new):
         """update the values in the db"""

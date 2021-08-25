@@ -1,5 +1,8 @@
 from flask import Flask, request, render_template
 import backend_code
+import conect_to_db
+
+
 
 '''allocated flask object'''
 app = Flask(__name__)
@@ -9,6 +12,7 @@ backend = backend_code.backend()
 @app.route('/')
 def load():
     """loud the form to fill the properties"""
+    conect_to_db.connection_db.sql_create_table()
     return render_template('home.html')
 
 @app.route('/replace-link/', methods=['POST', 'GET'])
