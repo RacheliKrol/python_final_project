@@ -18,7 +18,7 @@ def conv(path):
 
 class backend:
     def __init__(self):
-        self.connect = conect_to_db.connection_db()
+        self.connect = conect_to_db
 
     def renameFile(self, path, oldName, newName):
         """function that replace the old file name with a new"""
